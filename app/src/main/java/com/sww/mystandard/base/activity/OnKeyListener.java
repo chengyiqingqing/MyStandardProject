@@ -1,4 +1,4 @@
-package com.sww.mystandard.base;
+package com.sww.mystandard.base.activity;
 
 import android.view.KeyEvent;
 

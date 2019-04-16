@@ -1,4 +1,4 @@
-package com.sww.mystandard.base;
+package com.sww.mystandard.base.activity;
 
 /**
  * 【back键监听器】的添加和移除；
