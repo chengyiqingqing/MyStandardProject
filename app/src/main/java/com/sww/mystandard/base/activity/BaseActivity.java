@@ -3,7 +3,9 @@ package com.sww.mystandard.base.activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -53,6 +55,10 @@ public class BaseActivity extends AppCompatActivity implements OnKeyDownListener
         return super.onKeyDown(keyCode, event);
     }
 
+    /**
+     * 2.状态栏设置相关
+     * @param isLightBar true代表【白色状态栏黑色字体】 false【黑色状态栏白色字体】
+     */
     public void initTranslucentStatusBar(boolean isLightBar) {
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){// sdk版本号>=23;
             if (isLightBar) getWindow().getDecorView().setSystemUiVisibility(
@@ -70,6 +76,26 @@ public class BaseActivity extends AppCompatActivity implements OnKeyDownListener
         if (getSupportActionBar()!=null) getSupportActionBar().hide();
     }
 
+    /**
+     * 为activity设置根fragment
+     * @param layoutId  布局id;
+     * @param fragment  碎片
+     */
+    public void setRootFragment(@IdRes int layoutId, Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(layoutId, fragment)
+                .commitAllowingStateLoss();
+    }
 
+    /**
+     * 添加一个碎片；
+     */
+    public void addComponentFragment(@IdRes int layoutId, Fragment fragment){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(layoutId, fragment)
+                .commitAllowingStateLoss();
+    }
 
 }
