@@ -3,6 +3,8 @@ package com.sww.mystandard.http;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import com.sww.mystandard.http.params.CommonParams;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,12 +58,17 @@ public class DataClient<T> {
             Map<String, String> paramsMap = parseParams(request, uri);
             Request.Builder builder = request.newBuilder();
             initHeaderData(builder);
+//            initBaseParams(builder);
             return chain.proceed(builder.build());
         };
     }
 
     private void initHeaderData(Request.Builder builder) {
+        CommonParams.initHeaderParams(builder);
+    }
 
+    private void initBaseParams(Request.Builder builder,Request request,String host,String path,Map<String,String> paramsMap){
+        Map<String,String> params =CommonParams.getBaseParams(host,path,paramsMap);
     }
 
     private Map<String, String> parseParams(Request request, Uri uri) throws IOException{
